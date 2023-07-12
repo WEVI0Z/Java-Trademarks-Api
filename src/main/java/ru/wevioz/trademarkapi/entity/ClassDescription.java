@@ -30,7 +30,7 @@ public class ClassDescription {
     @ManyToOne
     @JoinColumn(name = "class_description_detail_id")
     @JsonIgnore
-    private GoodsService goodsService;
+    private ClassDescriptionDetail classDescriptionDetail;
 
     @OneToMany(mappedBy = "classDescription")
     private List<GoodsServicesDescription> goodsServicesDescriptions;

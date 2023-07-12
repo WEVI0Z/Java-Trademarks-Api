@@ -29,6 +29,6 @@ public class ClassDescriptionDetail {
     @JsonIgnore
     private GoodsService goodsService;
 
-    @OneToMany(mappedBy = "goodsService")
+    @OneToMany(mappedBy = "classDescriptionDetail")
     private List<ClassDescription> classDescriptions;
 }

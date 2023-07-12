@@ -22,7 +22,7 @@ public class GoodsServicesDetail {
     @Column(nullable = false, unique = true)
     private int id;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "trademark_id")
     @JsonIgnore
     private Trademark trademark;

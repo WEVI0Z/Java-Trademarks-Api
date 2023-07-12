@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -31,12 +32,9 @@ public class Trademark {
     @Column(name = "mark_current_status_code")
     private String markCurrentStatusCode;
 
-    @Column(name = "mark_current_status_date")
-    private LocalDate markCurrentStatusDate;
-
     @OneToOne(mappedBy = "trademark")
     private WordMarkSpecification wordMarkSpecification;
 
-    @OneToOne(mappedBy = "trademark")
-    private GoodsServicesDetail goodsServicesDetail;
+    @OneToMany(mappedBy = "trademark")
+    private List<GoodsServicesDetail> goodsServicesDetails;
 }
