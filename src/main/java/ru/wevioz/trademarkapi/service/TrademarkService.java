@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.wevioz.trademarkapi.entity.*;
+import ru.wevioz.trademarkapi.exception.NotFoundException;
 import ru.wevioz.trademarkapi.repository.TrademarkRepository;
 import ru.wevioz.trademarkapi.dto.TrademarkDto;
 import ru.wevioz.trademarkapi.mapper.TrademarkMapper;
@@ -59,7 +60,7 @@ public class TrademarkService {
         Optional<Trademark> trademark = trademarkRepository.findById((long) id);
 
         if (trademark.isEmpty()) {
-            throw new RuntimeException("error");
+            throw new NotFoundException("id");
         }
 
         return trademarkMapper.toDto(trademark.get());
@@ -69,7 +70,7 @@ public class TrademarkService {
         Optional<Trademark> trademark = trademarkRepository.findTrademarkByMark(mark);
 
         if (trademark.isEmpty()) {
-            throw new RuntimeException("error");
+            throw new NotFoundException("mark");
         }
 
         return trademarkMapper.toDto(trademark.get());
