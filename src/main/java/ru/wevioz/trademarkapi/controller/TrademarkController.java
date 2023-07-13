@@ -1,6 +1,5 @@
 package ru.wevioz.trademarkapi.controller;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -11,7 +10,6 @@ import ru.wevioz.trademarkapi.dto.TrademarkDto;
 import ru.wevioz.trademarkapi.dto.TrademarkShortDto;
 import ru.wevioz.trademarkapi.service.TrademarkService;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
