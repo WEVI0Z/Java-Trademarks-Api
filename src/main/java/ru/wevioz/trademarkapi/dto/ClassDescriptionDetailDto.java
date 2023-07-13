@@ -2,8 +2,6 @@ package ru.wevioz.trademarkapi.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,8 +11,6 @@ import java.util.List;
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ClassDescriptionDetailDto {
-    @JacksonXmlProperty(localName = "ClassDescription")
-    @JacksonXmlElementWrapper(useWrapping = false)
     @JsonAlias("ClassDescription")
     private List<ClassDescriptionDto> classDescriptions;
 }
