@@ -16,7 +16,9 @@ import ru.wevioz.trademarkapi.repository.WordMarkSpecificationRepository;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -43,10 +45,40 @@ public class TrademarkService {
         return trademarkDtos;
     }
 
-    private List<Trademark> saveAll(List<Trademark> trademarks) {
+    private void saveAll(List<Trademark> trademarks) {
         trademarkRepository.saveAll(trademarks);
+    }
 
-        return trademarks;
+    public List<TrademarkDto> getAll() {
+        Iterable<Trademark> trademarks = trademarkRepository.findAll();
+
+        return trademarkMapper.toGetDtoList(trademarks);
+    };
+
+    public TrademarkDto getById(int id) {
+        Optional<Trademark> trademark = trademarkRepository.findById((long) id);
+
+        if (trademark.isEmpty()) {
+            throw new RuntimeException("error");
+        }
+
+        return trademarkMapper.toDto(trademark.get());
+    }
+
+    public TrademarkDto getByMark(String mark) {
+        Optional<Trademark> trademark = trademarkRepository.findTrademarkByMark(mark);
+
+        if (trademark.isEmpty()) {
+            throw new RuntimeException("error");
+        }
+
+        return trademarkMapper.toDto(trademark.get());
+    }
+
+    public List<TrademarkDto> findByMark(String mark) {
+        Iterable<Trademark> trademarks = trademarkRepository.findTrademarksByMarkLike(mark);
+
+        return trademarkMapper.toGetDtoList(trademarks);
     }
 
     private Trademark createConnections(Trademark trademark) {

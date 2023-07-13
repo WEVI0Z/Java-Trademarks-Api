@@ -11,8 +11,4 @@ public class WordMarkSpecificationDto {
     @JacksonXmlProperty(localName = "MarkVerbalElementText")
     @JsonAlias("MarkVerbalElementText")
     private String markVerbalElementText;
-
-    private TrademarkDto trademark;
-
-    private int id;
 }
