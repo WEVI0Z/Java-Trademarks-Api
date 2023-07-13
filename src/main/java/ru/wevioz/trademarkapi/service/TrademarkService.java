@@ -2,12 +2,14 @@ package ru.wevioz.trademarkapi.service;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.wevioz.trademarkapi.entity.*;
+import ru.wevioz.trademarkapi.exception.InvalidFileException;
 import ru.wevioz.trademarkapi.exception.NotFoundException;
 import ru.wevioz.trademarkapi.repository.TrademarkRepository;
 import ru.wevioz.trademarkapi.dto.TrademarkDto;
@@ -16,14 +18,13 @@ import ru.wevioz.trademarkapi.repository.WordMarkSpecificationRepository;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class TrademarkService {
+    private final String MAIN_PATH = "src/main/resources/xmls";
+
     @Autowired private TrademarkMapper trademarkMapper;
     @Autowired private TrademarkRepository trademarkRepository;
     @Autowired private WordMarkSpecificationRepository wordMarkSpecificationRepository;
@@ -31,11 +32,15 @@ public class TrademarkService {
     @Transactional
     public List<TrademarkDto> fillDb() throws IOException {
         List<TrademarkDto> trademarkDtos = new ArrayList<>();
+        List<String> paths = getListFilesForFolder(new File(MAIN_PATH));
 
-        trademarkDtos.add(parseLocalFile("src/main/resources/xmls/018173419.xml"));
-        trademarkDtos.add(parseLocalFile("src/main/resources/xmls/018173420.xml"));
-        trademarkDtos.add(parseLocalFile("src/main/resources/xmls/018173427.xml"));
-        trademarkDtos.add(parseLocalFile("src/main/resources/xmls/018173428.xml"));
+        paths.forEach(path -> {
+            try {
+                trademarkDtos.add(parseLocalFile(new File(MAIN_PATH + "/" + path)));
+            } catch (Exception e) {
+                return;
+            }
+        });
 
         List<Trademark> trademarks = trademarkMapper.toEntityList(trademarkDtos);
 
@@ -44,6 +49,16 @@ public class TrademarkService {
         saveAll(trademarks);
 
         return trademarkDtos;
+    }
+
+    private List<String> getListFilesForFolder(File folder) {
+        List<String> paths = new ArrayList<>();
+
+        for (final File fileEntry : Objects.requireNonNull(folder.listFiles())) {
+            paths.add(fileEntry.getName());
+        }
+
+        return paths;
     }
 
     private void saveAll(List<Trademark> trademarks) {
@@ -105,8 +120,7 @@ public class TrademarkService {
         return trademark;
     }
 
-    private TrademarkDto parseLocalFile(String path) throws IOException {
-        File file = new File(path);
+    private TrademarkDto parseLocalFile(File file) throws IOException, InvalidFileException {
         XmlMapper xmlMapper = new XmlMapper();
         JsonNode node = xmlMapper.readTree(file);
         ObjectMapper objectMapper = new ObjectMapper();
@@ -118,6 +132,21 @@ public class TrademarkService {
                 .path("TradeMarkDetails")
                 .path("TradeMark");
 
-        return objectMapper.readValue(currentNode.toString(), TrademarkDto.class);
+        if (!checkMarkFeature(currentNode)) {
+            throw new InvalidFileException();
+        }
+
+        try {
+            return objectMapper.readValue(currentNode.toString(), TrademarkDto.class);
+        } catch (Exception e) {
+            throw new InvalidFileException();
+        }
+    }
+
+    private boolean checkMarkFeature(JsonNode node) {
+        return node
+                .path("MarkFeature")
+                .textValue()
+                .contains("Word");
     }
 }
