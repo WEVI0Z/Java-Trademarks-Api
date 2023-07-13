@@ -28,12 +28,15 @@ public class TrademarkService {
 
     @Autowired private TrademarkMapper trademarkMapper;
     @Autowired private TrademarkRepository trademarkRepository;
-    @Autowired private WordMarkSpecificationRepository wordMarkSpecificationRepository;
 
     @Transactional
-    public List<TrademarkDto> fillDb() throws IOException {
+    public List<TrademarkDto> fillDb() {
         List<TrademarkDto> trademarkDtos = new ArrayList<>();
         List<String> paths = getListFilesForFolder(new File(MAIN_PATH));
+
+        if (getAll().size() != 0) {
+            return trademarkDtos;
+        }
 
         paths.forEach(path -> {
             try {
