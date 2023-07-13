@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ru.wevioz.trademarkapi.dto.TrademarkDto;
+import ru.wevioz.trademarkapi.dto.TrademarkShortDto;
 import ru.wevioz.trademarkapi.service.TrademarkService;
 
 import java.io.File;
@@ -32,13 +33,18 @@ public class TrademarkController {
         return trademarkService.getById(id);
     }
 
-    @GetMapping("mark/{mark}")
+    @GetMapping("/mark/{mark}")
     public TrademarkDto getByNumber(@PathVariable String mark) {
         return trademarkService.getByMark(mark);
     }
 
-    @GetMapping("mark/find/{mark}")
+    @GetMapping("/mark/find/{mark}")
     public List<TrademarkDto> findByMark(@PathVariable String mark) {
         return trademarkService.findByMark(mark);
+    }
+
+    @GetMapping("/short")
+    public List<TrademarkShortDto> findByMark() {
+        return trademarkService.getShortTrademarks();
     }
 }

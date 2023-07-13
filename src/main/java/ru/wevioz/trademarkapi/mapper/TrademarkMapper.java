@@ -3,6 +3,7 @@ package ru.wevioz.trademarkapi.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import ru.wevioz.trademarkapi.dto.TrademarkDto;
+import ru.wevioz.trademarkapi.dto.TrademarkShortDto;
 import ru.wevioz.trademarkapi.entity.Trademark;
 
 import java.util.List;
@@ -12,6 +13,8 @@ public interface TrademarkMapper {
     Trademark toEntity(TrademarkDto dto);
 
     TrademarkDto toDto(Trademark entity);
+
+    List<TrademarkShortDto> toShortDtoList (Iterable<Trademark> list);
 
     List<TrademarkDto> toGetDtoList(Iterable<Trademark> iterable);
     List<TrademarkDto> toGetDtoList(List<Trademark> list);

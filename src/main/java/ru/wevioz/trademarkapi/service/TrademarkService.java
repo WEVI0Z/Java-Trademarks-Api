@@ -8,6 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.wevioz.trademarkapi.dto.TrademarkShortDto;
 import ru.wevioz.trademarkapi.entity.*;
 import ru.wevioz.trademarkapi.exception.InvalidFileException;
 import ru.wevioz.trademarkapi.exception.NotFoundException;
@@ -49,6 +50,10 @@ public class TrademarkService {
         saveAll(trademarks);
 
         return trademarkDtos;
+    }
+
+    public List<TrademarkShortDto> getShortTrademarks() {
+        return trademarkMapper.toShortDtoList(trademarkRepository.findAll());
     }
 
     private List<String> getListFilesForFolder(File folder) {
