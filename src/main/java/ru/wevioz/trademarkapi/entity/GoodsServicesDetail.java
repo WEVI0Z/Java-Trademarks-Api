@@ -22,11 +22,11 @@ public class GoodsServicesDetail {
     @Column(nullable = false, unique = true)
     private int id;
 
-    @ManyToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "trademark_id")
     @JsonIgnore
     private Trademark trademark;
 
-    @OneToOne(mappedBy = "goodsServicesDetail")
+    @OneToOne(mappedBy = "goodsServicesDetail", cascade = {CascadeType.ALL})
     private GoodsService goodsService;
 }

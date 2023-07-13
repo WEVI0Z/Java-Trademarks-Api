@@ -25,7 +25,7 @@ public class WordMarkSpecification {
     @Column(name = "mark_verbal_element_text")
     private String markVerbalElementText;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "trademark_id")
     @JsonIgnore
     private Trademark trademark;

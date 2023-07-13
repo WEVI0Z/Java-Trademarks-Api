@@ -29,12 +29,9 @@ public class Trademark {
     @Column(name = "mark_feature")
     private String markFeature;
 
-    @Column(name = "mark_current_status_code")
-    private String markCurrentStatusCode;
-
-    @OneToOne(mappedBy = "trademark")
+    @OneToOne(mappedBy = "trademark", cascade = {CascadeType.ALL})
     private WordMarkSpecification wordMarkSpecification;
 
-    @OneToMany(mappedBy = "trademark")
-    private List<GoodsServicesDetail> goodsServicesDetails;
+    @OneToOne(mappedBy = "trademark", cascade = {CascadeType.ALL})
+    private GoodsServicesDetail goodsServicesDetails;
 }

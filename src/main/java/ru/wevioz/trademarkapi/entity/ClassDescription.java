@@ -27,11 +27,11 @@ public class ClassDescription {
     @Column(name = "class_number")
     private int classNumber;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "class_description_detail_id")
     @JsonIgnore
     private ClassDescriptionDetail classDescriptionDetail;
 
-    @OneToMany(mappedBy = "classDescription")
+    @OneToMany(mappedBy = "classDescription", cascade = {CascadeType.ALL})
     private List<GoodsServicesDescription> goodsServicesDescriptions;
 }

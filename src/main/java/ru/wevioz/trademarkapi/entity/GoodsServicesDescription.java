@@ -28,7 +28,7 @@ public class GoodsServicesDescription {
     @Column(name = "content")
     private String content;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "class_description_id")
     @JsonIgnore
     private ClassDescription classDescription;

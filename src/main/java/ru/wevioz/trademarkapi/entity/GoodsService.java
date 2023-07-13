@@ -23,13 +23,13 @@ public class GoodsService {
     private int id;
 
     @Column(name = "classification_number")
-    private int classificationNumber;
+    private int classificationVersion;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "goods_services_detail_id")
     @JsonIgnore
     private GoodsServicesDetail goodsServicesDetail;
 
-    @OneToOne(mappedBy = "goodsService")
+    @OneToOne(mappedBy = "goodsService", cascade = {CascadeType.ALL})
     private ClassDescriptionDetail classDescriptionDetail;
 }
