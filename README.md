@@ -19,6 +19,10 @@ url=jdbc:postgresql://localhost:5432/postgres
 username=postgres
 password=pass123
 ```
+To run migrations use Liquibase:
+```
+mvn liquibase:update
+```
 
 ## Swagger
 The API provides user with Swagger UI page, it is available after successful program start on the next url
