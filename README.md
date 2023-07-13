@@ -29,4 +29,4 @@ The API provides user with Swagger UI page, it is available after successful pro
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
-All searchings bound with the field MarkFeature
+All searchings bound with the field MarkVerbalElementText
