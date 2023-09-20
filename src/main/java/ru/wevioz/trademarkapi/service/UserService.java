@@ -50,13 +50,13 @@ public class UserService {
         return new UserRegisterDto(token);
     }
     public UserLoginResponseDto login(UserLoginRequestDto dto) {
-        Optional<User> user = userRepository.findUserByLoginAndPassword(dto.getLogin(), dto.getPassword());
+        List<User> users = userRepository.findUserByLoginAndPassword(dto.getLogin(), dto.getPassword());
 
-        if (user.isEmpty()) {
+        if (Objects.isNull(users)) {
             throw new NotFoundException("user");
         }
 
-        User userEntity = user.get();
+        User userEntity = users.get(0);
 
         String token = JWT.create().sign(Algorithm.HMAC256(String.valueOf(Math.random())));
         Token tokenEntity = new Token();
