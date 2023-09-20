@@ -6,7 +6,7 @@
 For the sake of the assignment, let's focus just on word trademarks (not visual/audible/etc), you can distinguish them by the "MarkFeature" attribute being "Word". Here's an example of a record in the data dump: https://pastebin.com/8G7ysw2X
 3) The server should support at least:
 - searching in a database for exact trademark;
-- fuzzily finding some 'nearest' trademarks (for some meaningful definition of 'nearest').
+- fuzzily finding some 'nearest' trademar ks (for some meaningful definition of 'nearest').
 
 ## Database
 Start up the postgres DB with docker-compose
