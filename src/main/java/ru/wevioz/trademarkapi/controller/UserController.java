@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.wevioz.trademarkapi.dto.*;
+import ru.wevioz.trademarkapi.entity.Plan;
 import ru.wevioz.trademarkapi.service.UserService;
 
+// User controller that says what can user do
 @RestController
 @RequestMapping(value = "/user")
 @RequiredArgsConstructor
@@ -39,5 +41,10 @@ public class UserController {
     @PostMapping("details/{id}")
     public DetailDto setDetails(@PathVariable("id") Long id, @RequestBody DetailDto dto){
         return userService.setDetails(id, dto);
+    }
+
+    @GetMapping("plan/{id}")
+    public PlanDto getPlane(@PathVariable("id") Long id){
+        return userService.getPlan(id);
     }
 }
