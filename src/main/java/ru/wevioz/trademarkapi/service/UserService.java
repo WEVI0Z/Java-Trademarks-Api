@@ -6,18 +6,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.wevioz.trademarkapi.dto.*;
-import ru.wevioz.trademarkapi.entity.Detail;
-import ru.wevioz.trademarkapi.entity.Plan;
-import ru.wevioz.trademarkapi.entity.Token;
-import ru.wevioz.trademarkapi.entity.User;
+import ru.wevioz.trademarkapi.entity.*;
 import ru.wevioz.trademarkapi.exception.NotFoundException;
-import ru.wevioz.trademarkapi.repository.DetailRepository;
-import ru.wevioz.trademarkapi.repository.PlanRepository;
-import ru.wevioz.trademarkapi.repository.TokenRepository;
-import ru.wevioz.trademarkapi.repository.UserRepository;
+import ru.wevioz.trademarkapi.repository.*;
 
 import java.io.NotActiveException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -30,6 +25,7 @@ public class UserService {
     @Autowired TokenRepository tokenRepository;
     @Autowired DetailRepository detailRepository;
     @Autowired PlanRepository planRepository;
+    @Autowired BotRepository botRepository;
 
     public UserRegisterDto register(UserRegisterRequestDto dto) {
         User user = new User();
@@ -81,7 +77,8 @@ public class UserService {
         return tokens.get(0).getUser().getId();
     }
 
-    public DetailDto getDetails(Long id) {
+    public DetailDto getDetails(String token) {
+        Long id = (long) auth(token);
         Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
@@ -104,7 +101,8 @@ public class UserService {
         return dto;
     }
 
-    public DetailDto setDetails(Long id, DetailDto dto) {
+    public DetailDto setDetails(String token, DetailDto dto) {
+        Long id = (long) auth(token);
         Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
@@ -133,7 +131,8 @@ public class UserService {
         return dto;
     }
 
-    public PlanDto getPlan(long id) {
+    public PlanDto getPlan(String token) {
+        Long id = (long) auth(token);
         Optional<User> user = userRepository.findById(id);
 
         if (user.isEmpty()) {
@@ -153,5 +152,115 @@ public class UserService {
         dto.setStartDate(plan.getStartDate());
 
         return dto;
+    }
+
+    public PlanDto changePlan(String token, PlanChangeDto dto) {
+        Long id = (long) auth(token);
+        Optional<User> user = userRepository.findById(id);
+
+        if (user.isEmpty()) {
+            throw new NotFoundException("user");
+        }
+
+        User userEntity = user.get();
+
+        Plan plan = userEntity.getPlan();
+        plan.setType(dto.getType());
+        plan.setStartDate(LocalDate.now());
+        plan.setEndDate(LocalDate.now().plusDays(dto.getDays()));
+
+        plan.setUser(userEntity);
+        planRepository.save(plan);
+
+        PlanDto planDto = new PlanDto();
+        planDto.setType(plan.getType());
+        planDto.setStartDate(plan.getStartDate());
+        planDto.setEndDate(plan.getEndDate());
+
+        return planDto;
+    }
+
+    public BotResponseDto createBot(String token, BotRequestDto dto) {
+        Long id = (long) auth(token);
+        Optional<User> user = userRepository.findById(id);
+
+        if (user.isEmpty()) {
+            throw new NotFoundException("user");
+        }
+
+        User userEntity = user.get();
+
+        Bot bot = new Bot();
+        bot.setName(dto.getName());
+        bot.setStatus(false);
+        bot.setStartTime(null);
+
+        bot.setUser(userEntity);
+        botRepository.save(bot);
+
+        BotResponseDto botDto = new BotResponseDto();
+        botDto.setBotId((long) bot.getId());
+
+        return botDto;
+    }
+
+    public Bot getBot(String token, Long botId) {
+        Long id = (long) auth(token);
+        Optional<Bot> botOptional = botRepository.findById(botId);
+
+        if (botOptional.isEmpty()) {
+            throw new NotFoundException("bot");
+        }
+
+        return botOptional.get();
+    }
+
+    public Bot startBot(String token, Long botId) {
+        Long id = (long) auth(token);
+        Optional<Bot> botOptional = botRepository.findById(botId);
+
+        if (botOptional.isEmpty()) {
+            throw new NotFoundException("bot");
+        }
+
+        Bot bot = botOptional.get();
+        bot.setStartTime(LocalDateTime.now());
+        bot.setStatus(true);
+
+        botRepository.save(bot);
+
+        return bot;
+    }
+
+    public Bot changeBotName(String token, Long botId, String name) {
+        Long id = (long) auth(token);
+        Optional<Bot> botOptional = botRepository.findById(botId);
+
+        if (botOptional.isEmpty()) {
+            throw new NotFoundException("bot");
+        }
+
+        Bot bot = botOptional.get();
+        bot.setName(name);
+        botRepository.save(bot);
+
+        return bot;
+    }
+
+    public Bot stopBot(String token, Long botId) {
+        Long id = (long) auth(token);
+        Optional<Bot> botOptional = botRepository.findById(botId);
+
+        if (botOptional.isEmpty()) {
+            throw new NotFoundException("bot");
+        }
+
+        Bot bot = botOptional.get();
+        bot.setStartTime(null);
+        bot.setStatus(false);
+
+        botRepository.save(bot);
+
+        return bot;
     }
 }

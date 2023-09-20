@@ -40,4 +40,8 @@ public class User {
     @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL})
     @JsonIgnore
     private Plan plan;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    @JsonIgnore
+    private List<Bot> bot;
 }

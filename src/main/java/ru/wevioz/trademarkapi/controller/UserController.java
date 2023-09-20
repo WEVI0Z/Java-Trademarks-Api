@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.wevioz.trademarkapi.dto.*;
+import ru.wevioz.trademarkapi.entity.Bot;
 import ru.wevioz.trademarkapi.entity.Plan;
 import ru.wevioz.trademarkapi.service.UserService;
 
@@ -33,18 +34,48 @@ public class UserController {
         return userService.auth(token);
     }
 
-    @GetMapping("details/{id}")
-    public DetailDto getDetails(@PathVariable("id") Long id){
-        return userService.getDetails(id);
+    @GetMapping("details")
+    public DetailDto getDetails(@RequestHeader("token") String token){
+        return userService.getDetails(token);
     }
 
-    @PostMapping("details/{id}")
-    public DetailDto setDetails(@PathVariable("id") Long id, @RequestBody DetailDto dto){
-        return userService.setDetails(id, dto);
+    @PostMapping("details")
+    public DetailDto setDetails(@RequestHeader("token") String token, @RequestBody DetailDto dto){
+        return userService.setDetails(token, dto);
     }
 
-    @GetMapping("plan/{id}")
-    public PlanDto getPlane(@PathVariable("id") Long id){
-        return userService.getPlan(id);
+    @GetMapping("plan")
+    public PlanDto getPlane(@RequestHeader("token") String token){
+        return userService.getPlan(token);
+    }
+
+    @PostMapping("plan")
+    public PlanDto changePlan(@RequestHeader("token") String token, @RequestBody PlanChangeDto dto){
+        return userService.changePlan(token, dto);
+    }
+
+    @PostMapping("bot")
+    public BotResponseDto createBot(@RequestHeader("token") String token, @RequestBody BotRequestDto dto) {
+        return userService.createBot(token, dto);
+    }
+
+    @GetMapping("bot/{botId}")
+    public Bot getBot(@RequestHeader("token") String token, @PathVariable Long botId) {
+        return userService.getBot(token, botId);
+    }
+
+    @GetMapping("bot/{botId}/name/{name}")
+    public Bot changeBotName(@RequestHeader("token") String token, @PathVariable Long botId, @PathVariable String name) {
+        return userService.changeBotName(token, botId, name);
+    }
+
+    @PostMapping("bot/{botId}/start")
+    public Bot startBot(@RequestHeader("token") String token, @PathVariable Long botId) {
+        return userService.startBot(token, botId);
+    }
+
+    @PostMapping("bot/{botId}/stop")
+    public Bot stopBot(@RequestHeader("token") String token, @PathVariable Long botId) {
+        return userService.stopBot(token, botId);
     }
 }
