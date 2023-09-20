@@ -5,11 +5,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd"
 >
-    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_trademarks_table-changelog.xml"/>
-    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_word_mark_specifications_table-changelog.xml"/>
-    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_goods_services_details_table-changelog.xml"/>
-    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_goods_services_table-changelog.xml"/>
-    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_class_description_details_table-changelog.xml"/>
-    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_class_descriptions_table-changelog.xml"/>
-    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_goods_services_descriptions_table-changelog.xml"/>
+<!--    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_trademarks_table-changelog.xml"/>-->
+<!--    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_word_mark_specifications_table-changelog.xml"/>-->
+<!--    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_goods_services_details_table-changelog.xml"/>-->
+<!--    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_goods_services_table-changelog.xml"/>-->
+<!--    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_class_description_details_table-changelog.xml"/>-->
+<!--    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_class_descriptions_table-changelog.xml"/>-->
+<!--    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_goods_services_descriptions_table-changelog.xml"/>-->
+    <include file="src/main/resources/db/changelog/v1.0.0/create-users-table-changelog.xml"/>
+    <include file="src/main/resources/db/changelog/v1.0.0/create-tokens-table-changelog.xml"/>
 </databaseChangeLog>
