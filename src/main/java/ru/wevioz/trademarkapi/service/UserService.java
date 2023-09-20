@@ -8,10 +8,13 @@ import org.springframework.stereotype.Service;
 import ru.wevioz.trademarkapi.dto.*;
 import ru.wevioz.trademarkapi.entity.Token;
 import ru.wevioz.trademarkapi.entity.User;
+import ru.wevioz.trademarkapi.exception.NotFoundException;
 import ru.wevioz.trademarkapi.repository.TokenRepository;
 import ru.wevioz.trademarkapi.repository.UserRepository;
 
+import java.io.NotActiveException;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor
@@ -35,7 +38,21 @@ public class UserService {
         return new UserRegisterDto(token);
     }
     public UserLoginResponseDto login(UserLoginRequestDto dto) {
+        Optional<User> user = userRepository.findUserByLoginAndPassword(dto.getLogin(), dto.getPassword());
 
-        return new UserLoginResponseDto("12353413243");
+        if (user.isEmpty()) {
+            throw new NotFoundException("user");
+        }
+
+        User userEntity = user.get();
+
+        String token = JWT.create().sign(Algorithm.HMAC256(String.valueOf(Math.random())));
+        Token tokenEntity = new Token();
+        tokenEntity.setToken(token);
+        tokenEntity.setUser(userEntity);
+
+        tokenRepository.save(tokenEntity);
+
+        return new UserLoginResponseDto(token);
     }
 }
