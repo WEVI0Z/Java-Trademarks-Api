@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.wevioz.trademarkapi.dto.UserLoginRequestDto;
+import ru.wevioz.trademarkapi.dto.UserLoginResponseDto;
 import ru.wevioz.trademarkapi.dto.UserRegisterDto;
 import ru.wevioz.trademarkapi.dto.UserRegisterRequestDto;
 import ru.wevioz.trademarkapi.service.UserService;
@@ -22,5 +24,10 @@ public class UserController {
     @PostMapping("/register")
     public UserRegisterDto register(@RequestBody @Valid UserRegisterRequestDto dto) {
         return userService.register(dto);
+    }
+
+    @PostMapping("/login")
+    public UserLoginResponseDto login(@RequestBody @Valid UserLoginRequestDto dto) {
+        return userService.login(dto);
     }
 }

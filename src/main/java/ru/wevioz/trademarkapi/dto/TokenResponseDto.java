@@ -4,9 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
-public class UserRegisterDto extends TokenResponseDto {
-    public UserRegisterDto(String token) {
-        super(token);
-    }
+public class TokenResponseDto {
+    private String token;
 }
