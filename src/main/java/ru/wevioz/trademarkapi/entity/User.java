@@ -32,4 +32,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
     @JsonIgnore
     private List<Token> token;
+
+    @OneToOne(mappedBy = "user", cascade = {CascadeType.ALL})
+    @JsonIgnore
+    private Detail detail;
 }

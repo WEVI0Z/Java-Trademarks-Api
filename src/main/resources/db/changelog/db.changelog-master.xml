@@ -14,4 +14,5 @@
 <!--    <include file="src/main/resources/db/changelog/v1.0.0/12072023-insert_goods_services_descriptions_table-changelog.xml"/>-->
     <include file="src/main/resources/db/changelog/v1.0.0/create-users-table-changelog.xml"/>
     <include file="src/main/resources/db/changelog/v1.0.0/create-tokens-table-changelog.xml"/>
+    <include file="src/main/resources/db/changelog/v1.0.0/create-details-table-changelog.xml"/>
 </databaseChangeLog>
