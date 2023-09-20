@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "9480288a-0967-4e66-9331-e042dae5ca86",
+		"name": "DS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28988849"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"weviozhf\",\r\n    \"password\": \"12grggrgrg33\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/register",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"login\": \"weviozhf\",\r\n    \"password\": \"12grggrgrg33\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/login",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.RgjUWWmWt2sGKPlPuevymWtPKT6PYzs9dYrnJzMfNc4",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://127.0.0.1:8080/user/auth",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "auth Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/auth",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/details",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set-details",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Harkaviy Alexey Petrovich\",\r\n    \"company\": \"Intexsoft\",\r\n    \"phone\": \"+375333416878\",\r\n    \"address\": \"Kabyaka\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/details",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"details"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-plan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/plan",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"plan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "set-plan",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"1\",\r\n    \"days\": 40\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/plan",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"plan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create-bot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"test-bot\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/bot",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"bot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-bot",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/bot/5",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"bot",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "start-bot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/bot/4/start",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"bot",
+								"4",
+								"start"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.RgjUWWmWt2sGKPlPuevymWtPKT6PYzs9dYrnJzMfNc4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "stop-bot",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/bot/6/stop",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"bot",
+								"6",
+								"stop"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change-bot-name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.aihknUtHtNNFzUeO9SzbeZAoWM9jhb4s21an2jgYyqw",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://92.50.130.70:37698/user/bot/6/name/test",
+							"protocol": "http",
+							"host": [
+								"92",
+								"50",
+								"130",
+								"70"
+							],
+							"port": "37698",
+							"path": [
+								"user",
+								"bot",
+								"6",
+								"name",
+								"test"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.e30.RgjUWWmWt2sGKPlPuevymWtPKT6PYzs9dYrnJzMfNc4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stat",
+			"item": [
+				{
+					"name": "getStats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8080/stat",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8080",
+							"path": [
+								"stat"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
