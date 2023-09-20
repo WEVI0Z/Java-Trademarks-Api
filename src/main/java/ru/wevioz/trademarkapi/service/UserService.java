@@ -13,6 +13,7 @@ import ru.wevioz.trademarkapi.repository.TokenRepository;
 import ru.wevioz.trademarkapi.repository.UserRepository;
 
 import java.io.NotActiveException;
+import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
@@ -54,5 +55,14 @@ public class UserService {
         tokenRepository.save(tokenEntity);
 
         return new UserLoginResponseDto(token);
+    }
+    public Integer auth(String token) {
+        List<Token> tokens = tokenRepository.findAllByToken(token);
+
+        if (tokens.isEmpty()) {
+            throw new NotFoundException("token");
+        }
+
+        return tokens.get(0).getUser().getId();
     }
 }
